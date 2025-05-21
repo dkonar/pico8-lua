@@ -3,17 +3,17 @@ use zed::lsp::CompletionKind;
 use zed::{CodeLabel, CodeLabelSpan, LanguageServerId};
 use zed_extension_api::{self as zed, Result};
 
-struct LuaExtension {
+struct Pico8Extension {
     cached_binary_path: Option<String>,
 }
 
-impl LuaExtension {
+impl Pico8Extension {
     fn language_server_binary_path(
         &mut self,
         language_server_id: &LanguageServerId,
         worktree: &zed::Worktree,
     ) -> Result<String> {
-        if let Some(path) = worktree.which("lua-language-server") {
+        if let Some(path) = worktree.which("pico8-ls") {
             return Ok(path);
         }
 
@@ -28,7 +28,7 @@ impl LuaExtension {
             &zed::LanguageServerInstallationStatus::CheckingForUpdate,
         );
         let release = zed::latest_github_release(
-            "LuaLS/lua-language-server",
+            "dkonar/pico8-ls",
             zed::GithubReleaseOptions {
                 require_assets: true,
                 pre_release: false,
@@ -37,7 +37,7 @@ impl LuaExtension {
 
         let (platform, arch) = zed::current_platform();
         let asset_name = format!(
-            "lua-language-server-{version}-{os}-{arch}.{extension}",
+            "pico8-ls-{version}-{os}-{arch}.{extension}",
             version = release.version,
             os = match platform {
                 zed::Os::Mac => "darwin",
@@ -61,9 +61,9 @@ impl LuaExtension {
             .find(|asset| asset.name == asset_name)
             .ok_or_else(|| format!("no asset found matching {:?}", asset_name))?;
 
-        let version_dir = format!("lua-language-server-{}", release.version);
+        let version_dir = format!("pico8-ls-{}", release.version);
         let binary_path = format!(
-            "{version_dir}/bin/lua-language-server{extension}",
+            "{version_dir}/bin/pico8-ls{extension}",
             extension = match platform {
                 zed::Os::Mac | zed::Os::Linux => "",
                 zed::Os::Windows => ".exe",
@@ -101,7 +101,7 @@ impl LuaExtension {
     }
 }
 
-impl zed::Extension for LuaExtension {
+impl zed::Extension for Pico8Extension {
     fn new() -> Self {
         Self {
             cached_binary_path: None,
@@ -167,4 +167,4 @@ impl zed::Extension for LuaExtension {
     }
 }
 
-zed::register_extension!(LuaExtension);
+zed::register_extension!(Pico8Extension);

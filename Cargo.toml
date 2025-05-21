@@ -1,12 +1,14 @@
 [package]
-name = "zed_lua"
-version = "0.1.2"
+name = "zed_pico8_lua"
+version = "0.1.0"
 edition = "2021"
 publish = false
 license = "Apache-2.0"
+description = "PICO-8 Lua language support for Zed"
+repository = "https://github.com/dkonar/pico8-lua"
 
 [lib]
-path = "src/lua.rs"
+path = "src/pico8.rs"
 crate-type = ["cdylib"]
 
 [dependencies]

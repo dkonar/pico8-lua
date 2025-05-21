@@ -1,14 +1,14 @@
-id = "lua"
-name = "Lua"
-description = "Lua support."
+id = "pico8-lua"
+name = "PICO-8 Lua"
+description = "Lua support for PICO-8 game development"
 version = "0.1.2"
 schema_version = 1
-authors = ["Max Brunsfeld <max@zed.dev>"]
-repository = "https://github.com/zed-extensions/lua"
+authors = ["Daniel Konar <dkonar@users.noreply.github.com>"]
+repository = "https://github.com/dkonar/pico8-ls"
 
-[language_servers.lua-language-server]
-name = "LuaLS"
-language = "Lua"
+[language_servers.pico8-ls]
+name = "PICO-8 LS"
+language = "pico8"
 
 [grammars.lua]
 repository = "https://github.com/tree-sitter-grammars/tree-sitter-lua"
