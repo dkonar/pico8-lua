@@ -63,7 +63,7 @@ impl Pico8Extension {
 
         let version_dir = format!("pico8-ls-{}", release.version);
         let binary_path = format!(
-            "{version_dir}/bin/pico8-ls{extension}",
+            "{version_dir}/pico8-ls{extension}",
             extension = match platform {
                 zed::Os::Mac | zed::Os::Linux => "",
                 zed::Os::Windows => ".exe",
